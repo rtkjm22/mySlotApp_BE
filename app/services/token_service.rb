@@ -14,7 +14,7 @@ class TokenService
         exp: (DateTime.current + 14.days).to_i
       }
 
-      rsa_private = OpenSSL::PKey::RSA.new(File.read(Rails.root.join('auth/service_key')))
+      rsa_private = OpenSSL::PKey::RSA.new(File.read(Rails.root.join('auth/service.key')))
       JWT.encode(payload, rsa_private, 'RS256')
     end
   end

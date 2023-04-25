@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: { user: { id: user.id, name: user.name, email: user.email } }, status: :ok
+    render json: { user: { id: current_user.id, name: current_user.name, email: current_user.email } }, status: :ok
   end
 
   def edit
