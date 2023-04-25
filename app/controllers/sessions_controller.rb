@@ -1,9 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-    user = User.all
-    hoge = hoge('hogehoge')
-    render json: hoge
-  end
+  def new; end
 
   def create
     token = TokenService.issue_by_password!(params[:email], params[:password])
