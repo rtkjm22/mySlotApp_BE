@@ -1,6 +1,7 @@
+require 'pry'
 class UsersController < ApplicationController
   include Authenticatable
-  before_action :authenticate_with_token!
+  before_action :authenticate_with_token!, except: %i[new create]
 
   def new
     @user = User.new

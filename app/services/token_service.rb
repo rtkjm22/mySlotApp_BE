@@ -2,7 +2,9 @@ class TokenService
   class << self
     def issue_by_password!(email, password)
       user = AuthenticationService.authenticate_user_with_password!(email, password)
-      issue_token(user.id)
+      token = issue_token(user.id)
+
+      { user: user, token: token }
     end
 
     private

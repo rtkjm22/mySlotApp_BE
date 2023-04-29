@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_22_100359) do
+ActiveRecord::Schema.define(version: 2023_04_27_142756) do
+
+  create_table "scores", force: :cascade do |t|
+    t.string "player_id"
+    t.integer "play_time"
+    t.integer "play_count"
+    t.integer "game_currency"
+    t.date "last_played"
+    t.float "win_rate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -18,6 +29,8 @@ ActiveRecord::Schema.define(version: 2023_04_22_100359) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", limit: 10, null: false
+    t.index ["user_id"], name: "index_users_on_user_id", unique: true
   end
 
 end
