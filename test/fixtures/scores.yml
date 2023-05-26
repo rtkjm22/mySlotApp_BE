@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_id: MyString
+  player_id: MyString
+  level: 1
+  play_time: 1
+  play_count: 1
+  game_currency: 1
+  last_played: 2023-04-27
+
+two:
+  player_id: MyString
+  player_id: MyString
+  level: 1
+  play_time: 1
+  play_count: 1
+  game_currency: 1
+  last_played: 2023-04-27
