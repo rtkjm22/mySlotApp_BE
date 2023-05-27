@@ -17,8 +17,8 @@ class AuthenticationService
       raise AuthenticationError
     end
 
-    user_id = decoded_token.first['sub']
-    user = User.find(user_id)
+    unique_id = decoded_token.first['sub']
+    user = User.find(unique_id)
     raise AuthenticationError if user.nil?
 
     user
