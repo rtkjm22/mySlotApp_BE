@@ -1,3 +1,4 @@
+require 'pry'
 class TokenService
   class << self
     def issue_by_password!(email, password)
