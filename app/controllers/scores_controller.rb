@@ -1,19 +1,29 @@
 require 'pry'
 class ScoresController < ApplicationController
   include Authenticatable
-  before_action :authenticate_with_token!, except: %i[new create]
+  before_action :authenticate_with_token!
 
   def new
-    @score = Score.new
-  end
-
-  def create
     if Score.find_by(unique_id: current_user.unique_id)
       render json: { message: 'ユーザーは既に存在しています。' },
              status: :bad_request
     else
       @score = current_user.scores.create(play_count: 0, last_played: Time.now, win_rate: 0, coin: 100)
-      @score.save
+      
+      if @score.save
+        render json: {
+          message: 'サインアップが完了しました！',
+          userInfo: { name: current_user.name, email: current_user.email, unique_id: current_user.unique_id },
+          scoreInfo: { play_count: @score.play_count, last_played: @score.last_played, win_rate: @score.win_rate, coin: @score.coin }
+        },
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:3000',
+          'Access-Control-Allow-Credentials': 'true'
+        },
+        status: :ok
+      else
+        render json: { message: 'ユーザー情報登録が失敗しました。' }, status: :bad_request
+      end
     end
   end
 

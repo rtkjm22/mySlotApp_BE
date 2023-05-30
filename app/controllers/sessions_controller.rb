@@ -1,3 +1,4 @@
+require 'pry'
 class SessionsController < ApplicationController
   def new; end
 
@@ -19,6 +20,6 @@ class SessionsController < ApplicationController
 
   # private
   #   def user_params
-  #     params.require(:user).permit(:email, :passowrd, :password_confirmation)
+  #     params.require(:user).permit(:email, :password, :password_confirmation)
   #   end
 end
