@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     result = TokenService.issue_by_password!(params[:email], params[:password])
-
+    log_in(result[:user])
     cookies[:token] = { value: result[:token] }
     render json: { userInfo: result[:user] }, status: :created,
            headers: {
@@ -15,11 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
-    redirect_to root_url
+    render json: { message: 'ログアウトが完了しました。' }, status: :ok
   end
-
-  # private
-  #   def user_params
-  #     params.require(:user).permit(:email, :password, :password_confirmation)
-  #   end
 end

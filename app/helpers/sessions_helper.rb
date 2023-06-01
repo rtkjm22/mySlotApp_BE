@@ -1,15 +1,17 @@
+require 'pry'
 module SessionsHelper
   # 渡されたユーザーでログイン
   def log_in(user)
-    session[:unique_id] = user.id
+    session[:unique_id] = user.unique_id
   end
 
   # 現在ログイン中のユーザーを返却（ユーザーが存在する場合）
-  # def current_user
-  #   # @current_userが存在しない場合はUserから検索
-  #   # find_byを使用しているのは、findだと例外が返ってきてしまう反面、find_byはnilが返却されるため
-  #   @current_user ||= User.find_by(id: session[:unique_id])
-  # end
+  def current_user
+    # @current_userが存在しない場合はUserから検索
+    # find_byを使用しているのは、findだと例外が返ってきてしまう反面、find_byはnilが返却されるため
+    @unique_id = session[:unique_id]
+    @current_user ||= User.find_by(unique_id: @unique_id)
+  end
 
   # 受け取ったユーザーがログイン中のユーザーと一致すればtrueを返却
   def current_user?(user)
