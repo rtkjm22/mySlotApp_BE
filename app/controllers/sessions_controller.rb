@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
     result = TokenService.issue_by_password!(params[:email], params[:password])
     log_in(result[:user])
     cookies[:token] = { value: result[:token] }
-    render json: { userInfo: result[:user] }, status: :created,
+    score = Score.find_by(unique_id: result[:user][:unique_id])
+    render json: { userInfo: result[:user], score: score }, status: :created,
            headers: {
              'Access-Control-Allow-Origin': 'http://localhost:3000',
              'Access-Control-Allow-Credentials': 'true'

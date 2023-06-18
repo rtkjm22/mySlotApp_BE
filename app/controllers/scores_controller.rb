@@ -8,7 +8,7 @@ class ScoresController < ApplicationController
       render json: { message: 'ユーザーは既に存在しています。' },
              status: :bad_request
     else
-      @score = current_user.scores.create(play_count: 0, last_played: Time.now, win_rate: 0, coin: 100)
+      @score = current_user.score.create(play_count: 0, last_played: Time.now, win_rate: 0, coin: 100)
       
       if @score.save
         render json: {
