@@ -26,7 +26,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: { user: { id: current_user.id, name: current_user.name, email: current_user.email, unique_id: current_user.unique_id } },
+    
+    @score = Score.find_by(unique_id: current_user.unique_id)
+    
+    render json: { userInfo: { id: current_user.id, name: current_user.name, email: current_user.email, unique_id: current_user.unique_id }, score: @score },
            status: :ok
   end
 
